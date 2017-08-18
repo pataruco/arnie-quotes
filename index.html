@@ -5,6 +5,20 @@
           <title>Contentful sandbox</title>
      </head>
      <body>
+          <h1>Arnie quotes test</h1>
+          <main id="app">
+               <article class="article">
+                    <blockquote cite="http://">
+                         <p> {{ quote.quote }} </p>
+                         <footer>
+                              <p>{{ quote.character }}</p>
+                              <p>{{ quote.movie }}</p>
+                              <time>{{ quote.year }}</time>
+                         </footer>
+                    </blockquote>
+               </article>
+               <button v-on:click="getRandomQuote"> New Quote </button>
+          </main>
           <script src="./public/js/app.js" charset="utf-8"></script>
      </body>
 </html>
