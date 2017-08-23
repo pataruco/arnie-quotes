@@ -7,17 +7,19 @@
      <body>
           <h1>Arnie quotes test</h1>
           <main id="app">
-               <article class="article">
-                    <blockquote cite="http://">
-                         <p> {{ quote.quote }} </p>
-                         <footer>
-                              <p>{{ quote.character }}</p>
-                              <p>{{ quote.movie }}</p>
-                              <time>{{ quote.year }}</time>
-                         </footer>
-                    </blockquote>
-               </article>
-               <button v-on:click="getRandomQuote"> New Quote </button>
+              <section v-for="quote in quotes">
+                  <article class="article">
+                      <blockquote cite="http://">
+                          <h2> {{ quote.fields.quote }} </h2>
+                          <footer>
+                              <p>{{ quote.fields.character }}</p>
+                              <p>{{ quote.fields.movie }}</p>
+                              <time>{{ quote.fields.year }}</time>
+                          </footer>
+                      </blockquote>
+                  </article>
+              </section>
+               <!-- <button v-on:click="getRandomQuote"> New Quote </button> -->
           </main>
           <script src="./public/js/app.js" charset="utf-8"></script>
      </body>

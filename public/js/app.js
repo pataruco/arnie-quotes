@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,7 +71,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 var contentful = __webpack_require__(2);
-var Vue = __webpack_require__(9);
+var Vue = __webpack_require__(3);
 var SPACE_ID = '6t8um8649ku7';
 var ACCESS_TOKEN = 'b1f8e5581b04e86e16d6ca876d41904c2c9f026c1ec806f246013e134a464c32';
 var SPACE_NAME = 'vue-sandbox';
@@ -87,8 +87,7 @@ window.onload = function () {
      var quote = new Vue({
           el: '#app',
           data: {
-               quotes: [],
-               quote: {}
+               quotes: []
           },
           methods: {
                getQuotes: function getQuotes() {
@@ -96,17 +95,18 @@ window.onload = function () {
 
                     client.getEntries().then(function (response) {
                          _this.quotes = response.items;
-                         _this.getRandomQuote();
+                         //  this.getRandomQuote()
+                         console.log(_this.quotes[0].fields);
                     }).catch(console.error);
-               },
-               getRandomQuote: function getRandomQuote() {
-                    var quotesLength = this.quotes.length;
-                    var randomNumber = this.getRandomArbitrary(0, quotesLength);
-                    return this.quote = this.quotes[randomNumber].fields;
-               },
-               getRandomArbitrary: function getRandomArbitrary(min, max) {
-                    return Math.floor(Math.random() * (max - min) + min);
                }
+               //    getRandomQuote: function( ) {
+               //         let quotesLength = this.quotes.length;
+               //         let randomNumber = this.getRandomArbitrary( 0, quotesLength );
+               //         return this.quote = this.quotes[randomNumber].fields;
+               //    },
+               //    getRandomArbitrary(min, max) {
+               //         return Math.floor( Math.random() * (max - min) + min );
+               //    }
           },
           beforeMount: function beforeMount() {
                this.getQuotes();
@@ -11271,45 +11271,6 @@ module.exports = function(module) {
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(0);
-module.exports = __webpack_require__(1);
-
-
-/***/ }),
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {/*!
  * Vue.js v2.4.2
@@ -21399,7 +21360,42 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(0);
+module.exports = __webpack_require__(1);
+
 
 /***/ })
 /******/ ]);

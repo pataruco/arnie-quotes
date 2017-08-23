@@ -11,30 +11,32 @@ const client = contentful.createClient({
      accessToken: ACCESS_TOKEN
 })
 
+const mixitup = require('mixitup');
+
 window.onload = function ( ) {
      let quote = new Vue({
           el: '#app',
           data: {
-               quotes: [ ],
-               quote: { }
+               quotes: [ ]
           },
           methods: {
                getQuotes: function( ) {
                     client.getEntries()
                     .then( (response) => {
                          this.quotes = response.items;
-                         this.getRandomQuote()
+                        //  this.getRandomQuote()
+                        console.log(this.quotes[0].fields);
                     })
                     .catch(console.error)
-               },
-               getRandomQuote: function( ) {
-                    let quotesLength = this.quotes.length;
-                    let randomNumber = this.getRandomArbitrary( 0, quotesLength );
-                    return this.quote = this.quotes[randomNumber].fields;
-               },
-               getRandomArbitrary(min, max) {
-                    return Math.floor( Math.random() * (max - min) + min );
                }
+            //    getRandomQuote: function( ) {
+            //         let quotesLength = this.quotes.length;
+            //         let randomNumber = this.getRandomArbitrary( 0, quotesLength );
+            //         return this.quote = this.quotes[randomNumber].fields;
+            //    },
+            //    getRandomArbitrary(min, max) {
+            //         return Math.floor( Math.random() * (max - min) + min );
+            //    }
           },
           beforeMount( ) {
                this.getQuotes( );

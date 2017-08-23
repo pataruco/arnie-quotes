@@ -17,6 +17,7 @@
   "dependencies": {
     "contentful": "^4.6.0",
     "laravel-mix": "^0.11.4",
+    "mixitup": "^3.2.1",
     "vue": "^2.4.2"
   }
 }
