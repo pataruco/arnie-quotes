@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html>
-     <head>
-          <meta charset="utf-8">
-          <title>Contentful sandbox</title>
-     </head>
-     <body>
-          <h1>Arnie quotes test</h1>
-          <main id="app">
-              <section v-for="quote in quotes">
-                  <article class="article">
-                      <blockquote cite="http://">
-                          <h2> {{ quote.fields.quote }} </h2>
-                          <footer>
-                              <p>{{ quote.fields.character }}</p>
-                              <p>{{ quote.fields.movie }}</p>
-                              <time>{{ quote.fields.year }}</time>
-                          </footer>
-                      </blockquote>
-                  </article>
-              </section>
-               <!-- <button v-on:click="getRandomQuote"> New Quote </button> -->
-          </main>
-          <script src="./public/js/app.js" charset="utf-8"></script>
-     </body>
+<head>
+    <meta charset="utf-8">
+    <title>Contentful sandbox</title>
+</head>
+<body>
+    <h1>Arnie quotes test</h1>
+    <main id="app">
+        <nav>
+            <ul v-for="character in characters">
+                <li>
+                    <button type="button" v-on:click="filterBy(character)">
+                        {{ character }}
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        <section id="js-article">
+            <article v-for="quote in quotes" v-bind:class="'.'+quote.fields.character" class="mix" v-bind:data-order="quote.fields.year">
+                <blockquote cite="http://">
+                    <h2> {{ quote.fields.quote }} </h2>
+                    <footer>
+                        <p>{{ quote.fields.character }}</p>
+                        <p>{{ quote.fields.movie }}</p>
+                        <time>{{ quote.fields.year }}</time>
+                    </footer>
+                </blockquote>
+            </article>
+        </section>
+    </main>
+    <script src="./public/js/app.js" charset="utf-8"></script>
+</body>
 </html>
