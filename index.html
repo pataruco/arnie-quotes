@@ -3,21 +3,20 @@
 <head>
     <meta charset="utf-8">
     <title>Contentful sandbox</title>
+    <link rel="stylesheet" href="./public/css/app.css">
 </head>
 <body>
     <h1>Arnie quotes test</h1>
     <main id="app">
-        <nav>
-            <ul v-for="character in characters">
-                <li>
-                    <button type="button" v-on:click="filterBy(character)">
-                        {{ character }}
-                    </button>
-                </li>
-            </ul>
+        <nav class="filters">
+            <button v-for="character in characters" type="button" v-bind:data-filter="'.'+character" class="filter-btn">
+                {{ character }}
+            </button>
+
+            <button type="button" data-filter=".Himself">Test</button>
         </nav>
-        <section id="js-article">
-            <article v-for="quote in quotes" v-bind:class="'.'+quote.fields.character" class="mix" v-bind:data-order="quote.fields.year">
+        <section id="js-container" class="container">
+            <article v-for="quote in quotes" v-bind:class="quote.fields.character" class="mix mix-target" v-bind:data-order="quote.fields.year">
                 <blockquote cite="http://">
                     <h2> {{ quote.fields.quote }} </h2>
                     <footer>
