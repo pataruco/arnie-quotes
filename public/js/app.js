@@ -77,91 +77,95 @@ var ACCESS_TOKEN = 'b1f8e5581b04e86e16d6ca876d41904c2c9f026c1ec806f246013e134a46
 var SPACE_NAME = 'vue-sandbox';
 
 var client = contentful.createClient({
-    // This is the space ID. A space is like a project folder in Contentful terms
-    space: SPACE_ID,
-    // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-    accessToken: ACCESS_TOKEN
+  // This is the space ID. A space is like a project folder in Contentful terms
+  space: SPACE_ID,
+  // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+  accessToken: ACCESS_TOKEN
 });
 
 var mixitup = __webpack_require__(3);
 
+// window.onload = function ( ) {
+//     let quote = new Vue({
+//         el: '#app',
+//         data: {
+//             quotes: [ ],
+//             characters: [ ]
+//         },
+//         methods: {
+//             getQuotes: function( ) {
+//                 client.getEntries()
+//                 .then( (response) => {
+//                     this.quotes = response.items;
+//                     this.setCharacters( this.quotes )
+//                 })
+//                 .catch(console.error)
+//             },
+//             filterBy: function ( quoteCharacter ) {
+//                 mixer.filter( `.${quoteCharacter}` )
+//             },
+//             setCharacters: function ( quotes ) {
+//                 let allCharacters = quotes.map( ( quote ) => {
+//                     return quote.fields.character;
+//                 });
+//                 let selectedCharacters = [ ];
+//
+//                 for ( character of allCharacters ) {
+//                     if (  !selectedCharacters.includes( character ) ) {
+//                         selectedCharacters.push( character )
+//                     }
+//                 }
+//                 this.characters = selectedCharacters;
+//
+//             }
+//         },
+//         beforeMount( ) {
+//             this.getQuotes( );
+//         },
+//           mounted( ) {
+//               mixitup('#js-container', {
+//                 // load: {
+//                 //   sort: 'order:asc'
+//                 // },
+//                   animation: {
+//                   effects: 'fade rotateZ(-180deg)',
+//                   duration: 700
+//                 },
+//                 classNames: {
+//                   block: 'filters',
+//                   elementFilter: 'filter-btn'
+//                 },
+//                 selectors: {
+//                   target: '.mix-target'
+//                 }
+//               });
+//           }
+//     });
+// }
+
 window.onload = function () {
-    var quote = new Vue({
-        el: '#app',
-        data: {
-            quotes: [],
-            characters: []
+  var quote = new Vue({
+    el: '#app',
+    mounted: function mounted() {
+      mixitup('#mix-wrapper', {
+        load: {
+          sort: 'order:asc'
         },
-        methods: {
-            getQuotes: function getQuotes() {
-                var _this = this;
-
-                client.getEntries().then(function (response) {
-                    _this.quotes = response.items;
-                    _this.setCharacters(_this.quotes);
-                }).catch(console.error);
-            },
-            filterBy: function filterBy(quoteCharacter) {
-                mixer.filter('.' + quoteCharacter);
-            },
-            setCharacters: function setCharacters(quotes) {
-                var allCharacters = quotes.map(function (quote) {
-                    return quote.fields.character;
-                });
-                var selectedCharacters = [];
-
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
-
-                try {
-                    for (var _iterator = allCharacters[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        character = _step.value;
-
-                        if (!selectedCharacters.includes(character)) {
-                            selectedCharacters.push(character);
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
-                        }
-                    } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
-                        }
-                    }
-                }
-
-                this.characters = selectedCharacters;
-            }
+        animation: {
+          effects: 'fade rotateZ(-180deg)',
+          duration: 700
         },
-        beforeMount: function beforeMount() {
-            this.getQuotes();
+        classNames: {
+          block: 'programs',
+          elementFilter: 'filter-btn',
+          elementSort: 'sort-btn'
         },
-        mounted: function mounted() {
-            mixitup('#js-container', {
-                // load: {
-                //   sort: 'order:asc'
-                // },
-                animation: {
-                    effects: 'fade rotateZ(-180deg)',
-                    duration: 700
-                },
-                classNames: {
-                    block: 'filters',
-                    elementFilter: 'filter-btn'
-                },
-                selectors: {
-                    target: '.mix-target'
-                }
-            });
+        selectors: {
+          target: '.mix-target'
         }
-    });
+      });
+    }
+  });
 };
 
 /***/ }),
