@@ -14,85 +14,60 @@ const client = contentful.createClient({
 const mixitup = require('mixitup');
 
 
-// window.onload = function ( ) {
-//     let quote = new Vue({
-//         el: '#app',
-//         data: {
-//             quotes: [ ],
-//             characters: [ ]
-//         },
-//         methods: {
-//             getQuotes: function( ) {
-//                 client.getEntries()
-//                 .then( (response) => {
-//                     this.quotes = response.items;
-//                     this.setCharacters( this.quotes )
-//                 })
-//                 .catch(console.error)
-//             },
-//             filterBy: function ( quoteCharacter ) {
-//                 mixer.filter( `.${quoteCharacter}` )
-//             },
-//             setCharacters: function ( quotes ) {
-//                 let allCharacters = quotes.map( ( quote ) => {
-//                     return quote.fields.character;
-//                 });
-//                 let selectedCharacters = [ ];
-//
-//                 for ( character of allCharacters ) {
-//                     if (  !selectedCharacters.includes( character ) ) {
-//                         selectedCharacters.push( character )
-//                     }
-//                 }
-//                 this.characters = selectedCharacters;
-//
-//             }
-//         },
-//         beforeMount( ) {
-//             this.getQuotes( );
-//         },
-//           mounted( ) {
-//               mixitup('#js-container', {
-//                 // load: {
-//                 //   sort: 'order:asc'
-//                 // },
-//                   animation: {
-//                   effects: 'fade rotateZ(-180deg)',
-//                   duration: 700
-//                 },
-//                 classNames: {
-//                   block: 'filters',
-//                   elementFilter: 'filter-btn'
-//                 },
-//                 selectors: {
-//                   target: '.mix-target'
-//                 }
-//               });
-//           }
-//     });
-// }
-
-window.onload = function( ) {
-        let quote = new Vue({
-            el: '#app',
-            mounted( ) {
-                mixitup('#mix-wrapper', {
-                  load: {
-                  	sort: 'order:asc'
-                  },
-                	animation: {
-                    effects: 'fade rotateZ(-180deg)',
-                    duration: 700
-                  },
-                  classNames: {
-                    block: 'programs',
-                    elementFilter: 'filter-btn',
-                    elementSort: 'sort-btn'
-                  },
-                  selectors: {
-                    target: '.mix-target'
-                  }
+window.onload = function ( ) {
+    let quote = new Vue({
+        el: '#app',
+        data: {
+            quotes: [ ],
+            characters: [ ]
+        },
+        methods: {
+            getQuotes: function( ) {
+                client.getEntries()
+                .then( (response) => {
+                    this.quotes = response.items;
+                    this.setCharacters( this.quotes )
+                })
+                .catch(console.error)
+            },
+            filterBy: function ( quoteCharacter ) {
+                mixer.filter( `.${quoteCharacter}` )
+            },
+            setCharacters: function ( quotes ) {
+                let allCharacters = quotes.map( ( quote ) => {
+                    return quote.fields.character;
                 });
+                let selectedCharacters = [ ];
+
+                for ( character of allCharacters ) {
+                    if (  !selectedCharacters.includes( character ) ) {
+                        selectedCharacters.push( character )
+                    }
+                }
+                this.characters = selectedCharacters;
+
             }
-        });
+        },
+        beforeMount( ) {
+            this.getQuotes( );
+        },
+          updated( ) {
+              mixitup('#js-container', {
+                // load: {
+                //   sort: 'order:asc'
+                // },
+                  animation: {
+                  effects: 'fade rotateZ(-180deg)',
+                  duration: 700
+                },
+                classNames: {
+                  block: 'filters',
+                  elementFilter: 'filter-btn'
+                },
+                selectors: {
+                  target: '.mix-target'
+                }
+              });
+          }
+    });
 }
