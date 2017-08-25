@@ -70,11 +70,16 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var contentful = __webpack_require__(2);
 var Vue = __webpack_require__(4);
 var SPACE_ID = '6t8um8649ku7';
 var ACCESS_TOKEN = 'b1f8e5581b04e86e16d6ca876d41904c2c9f026c1ec806f246013e134a464c32';
 var SPACE_NAME = 'vue-sandbox';
+var mixitup = __webpack_require__(3);
 
 var client = contentful.createClient({
     // This is the space ID. A space is like a project folder in Contentful terms
@@ -83,7 +88,54 @@ var client = contentful.createClient({
     accessToken: ACCESS_TOKEN
 });
 
-var mixitup = __webpack_require__(3);
+var Quote = function () {
+    function Quote(data) {
+        _classCallCheck(this, Quote);
+
+        this.data = data;
+    }
+
+    _createClass(Quote, [{
+        key: 'className',
+        get: function get() {
+            return this.data.movie.toLowerCase().replace(/\s/g, '-');
+        }
+    }, {
+        key: 'year',
+        get: function get() {
+            return this.data.year;
+        }
+    }, {
+        key: 'movie',
+        get: function get() {
+            return this.data.movie;
+        }
+    }, {
+        key: 'youTubeUrl',
+        get: function get() {
+            return this.data.youtubeUrl;
+        }
+    }, {
+        key: 'youTubeCode',
+        get: function get() {
+            var url = this.data.youtubeUrl;
+            url = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+            return url[2] !== undefined ? url[2].split(/[^0-9a-z_\-]/i)[0] : url[0];
+        }
+    }, {
+        key: 'quote',
+        get: function get() {
+            return this.data.quote;
+        }
+    }, {
+        key: 'character',
+        get: function get() {
+            return this.data.character;
+        }
+    }]);
+
+    return Quote;
+}();
 
 var mixer = void 0;
 window.onload = function () {
@@ -91,15 +143,16 @@ window.onload = function () {
         el: '#app',
         data: {
             quotes: [],
-            characters: []
+            movies: []
         },
         methods: {
             getQuotes: function getQuotes() {
                 var _this = this;
 
                 client.getEntries().then(function (response) {
-                    _this.quotes = response.items;
-                    _this.setCharacters(_this.quotes);
+                    // this.quotes = response.items;
+                    // this.setMovies( this.quotes )
+                    _this.setQuotes(response.items);
                 }).catch(console.error);
             },
             filterBy: function filterBy(quoteCharacter) {
@@ -107,40 +160,16 @@ window.onload = function () {
                 console.log(character);
                 mixer.filter('.' + quoteCharacter);
             },
-            setCharacters: function setCharacters(quotes) {
-                var allCharacters = quotes.map(function (quote) {
-                    return quote.fields.character;
+            setMovies: function setMovies(quotes) {
+                var allMovies = quotes.map(function (quote) {
+                    return quote.fields.movie.toLowerCase().replace(/\s/g, '-');
                 });
-                var selectedCharacters = [];
-
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
-
-                try {
-                    for (var _iterator = allCharacters[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        character = _step.value;
-
-                        if (!selectedCharacters.includes(character)) {
-                            selectedCharacters.push(character);
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
-                        }
-                    } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
-                        }
-                    }
-                }
-
-                this.characters = selectedCharacters;
+            },
+            setQuotes: function setQuotes(rawQuotes) {
+                var quotes = rawQuotes.map(function (rawQuoute) {
+                    return new Quote(rawQuoute.fields);
+                });
+                this.quotes = quotes;
             }
         },
         beforeMount: function beforeMount() {
