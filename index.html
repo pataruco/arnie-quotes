@@ -8,12 +8,11 @@
 <body>
     <h1>Arnie quotes test</h1>
     <main id="app">
-        <nav class="filters">
-            <button v-for="character in characters" type="button" v-bind:data-filter="'.'+character" class="filter-btn">
+        <nav>
+            <button v-for="character in characters" type="button" v-on:click="filterBy(character)">
+            <!-- <button v-for="character in characters" type="button" v-bind:data-filter="'.'+character" class="filter-btn"> -->
                 {{ character }}
             </button>
-
-            <button type="button" data-filter=".Himself">Test</button>
         </nav>
         <section id="js-container" class="container">
             <article v-for="quote in quotes" v-bind:class="quote.fields.character" class="mix mix-target" v-bind:data-order="quote.fields.year">

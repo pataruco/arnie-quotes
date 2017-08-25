@@ -13,7 +13,7 @@ const client = contentful.createClient({
 
 const mixitup = require('mixitup');
 
-
+let mixer;
 window.onload = function ( ) {
     let quote = new Vue({
         el: '#app',
@@ -31,6 +31,8 @@ window.onload = function ( ) {
                 .catch(console.error)
             },
             filterBy: function ( quoteCharacter ) {
+                let character = `.${quoteCharacter}`;
+                console.log(character );
                 mixer.filter( `.${quoteCharacter}` )
             },
             setCharacters: function ( quotes ) {
@@ -45,29 +47,19 @@ window.onload = function ( ) {
                     }
                 }
                 this.characters = selectedCharacters;
-
+                
             }
         },
         beforeMount( ) {
             this.getQuotes( );
         },
-          updated( ) {
-              mixitup('#js-container', {
-                // load: {
-                //   sort: 'order:asc'
-                // },
-                  animation: {
-                  effects: 'fade rotateZ(-180deg)',
-                  duration: 700
-                },
-                classNames: {
-                  block: 'filters',
-                  elementFilter: 'filter-btn'
-                },
-                selectors: {
-                  target: '.mix-target'
+        updated( ) {
+            mixer = mixitup('#js-container', {
+                animation: {
+                    effects: 'fade rotateZ(-180deg)',
+                    duration: 700
                 }
-              });
-          }
+            });
+        }
     });
 }
