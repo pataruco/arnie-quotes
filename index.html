@@ -9,23 +9,23 @@
     <h1>Arnie quotes test</h1>
     <main id="app">
         <nav>
-            <!-- <button v-for="character in characters" type="button" v-on:click="filterBy(character)"> -->
-            <!-- <button v-for="character in characters" type="button" v-bind:data-filter="'.'+character" class="filter-btn"> -->
-                <!-- {{ character }} -->
-            <!-- </button> -->
+            <select v-model="filter" v-on:change="filterBy()">
+                <option value="all" selected>All</option>
+                <option v-for="movie in movies" v-bind:value="movie.filter">{{ movie.name }}</option>
+            </select>
         </nav>
-            <section id="js-container" class="container">
-                <article v-for="quote in quotes" v-bind:class="quote.character" class="mix mix-target" v-bind:data-order="quote.year">
-                    <blockquote cite="http://">
-                        <h2> {{ quote.quote }} </h2>
-                        <footer>
-                            <p>{{ quote.character }}</p>
-                            <p>{{ quote.movie }}</p>
-                            <time>{{ quote.year }}</time>
-                        </footer>
-                    </blockquote>
-                </article>
-            </section>
+        <section id="js-container" class="container">
+            <article v-for="quote in quotes" v-bind:class="quote.className" class="mix mix-target" v-bind:data-order="quote.year">
+                <blockquote cite="http://">
+                    <h2> {{ quote.quote }} </h2>
+                    <footer>
+                        <p>{{ quote.character }}</p>
+                        <p>{{ quote.movie }}</p>
+                        <time>{{ quote.year }}</time>
+                    </footer>
+                </blockquote>
+            </article>
+        </section>
     </main>
     <script src="./public/js/app.js" charset="utf-8"></script>
 </body>
