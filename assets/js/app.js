@@ -21,7 +21,8 @@ window.onload = function() {
         data: {
             quotes: [],
             movies: [],
-            filter: ''
+            filter: '',
+            sort: ''
         },
         methods: {
             getQuotes: function() {
@@ -33,8 +34,11 @@ window.onload = function() {
                     .catch(console.error)
             },
             filterBy: function( ) {
+                if ( this.filter === 'all') {
+                    return mixer.filter( this.filter );
+                }
                 let movieFilter = `.${this.filter}`;
-                mixer.filter( movieFilter )
+                return mixer.filter( movieFilter )
             },
             setMovies: function(quotes) {
                 let movies = [ ];
@@ -52,6 +56,10 @@ window.onload = function() {
                 return this.quotes = rawQuotes.map((quote) => {
                     return new Quote(quote.fields);
                 });
+            },
+            sortBy: function ( ) {
+                let order = `order:${this.sort}`;
+                mixer.sort( order )
             }
         },
         beforeMount() {

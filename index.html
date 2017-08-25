@@ -9,13 +9,17 @@
     <h1>Arnie quotes test</h1>
     <main id="app">
         <nav>
-            <select v-model="filter" v-on:change="filterBy()">
-                <option value="all" selected>All</option>
+            <select v-model="filter" v-on:change="filterBy">
+                <option value="all">All</option>
                 <option v-for="movie in movies" v-bind:value="movie.filter">{{ movie.name }}</option>
+            </select>
+            <select v-model="sort" v-on:change="sortBy">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
             </select>
         </nav>
         <section id="js-container" class="container">
-            <article v-for="quote in quotes" v-bind:class="quote.className" class="mix mix-target" v-bind:data-order="quote.year">
+            <article v-for="quote in quotes" v-bind:class="quote.className" class="mix" v-bind:data-order="quote.year">
                 <blockquote cite="http://">
                     <h2> {{ quote.quote }} </h2>
                     <footer>

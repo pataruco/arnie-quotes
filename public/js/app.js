@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -72,14 +72,14 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__quote_js__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__movie_js__ = __webpack_require__(11);
-var contentful = __webpack_require__(3);
-var Vue = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__quote_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__movie_js__ = __webpack_require__(2);
+var contentful = __webpack_require__(4);
+var Vue = __webpack_require__(6);
 var SPACE_ID = '6t8um8649ku7';
 var ACCESS_TOKEN = 'b1f8e5581b04e86e16d6ca876d41904c2c9f026c1ec806f246013e134a464c32';
 var SPACE_NAME = 'vue-sandbox';
-var mixitup = __webpack_require__(4);
+var mixitup = __webpack_require__(5);
 
 
 
@@ -97,7 +97,8 @@ window.onload = function () {
         data: {
             quotes: [],
             movies: [],
-            filter: ''
+            filter: '',
+            sort: ''
         },
         methods: {
             getQuotes: function getQuotes() {
@@ -109,8 +110,11 @@ window.onload = function () {
                 }).catch(console.error);
             },
             filterBy: function filterBy() {
+                if (this.filter === 'all') {
+                    return mixer.filter(this.filter);
+                }
                 var movieFilter = '.' + this.filter;
-                mixer.filter(movieFilter);
+                return mixer.filter(movieFilter);
             },
             setMovies: function setMovies(quotes) {
                 var movies = [];
@@ -150,6 +154,10 @@ window.onload = function () {
                 return this.quotes = rawQuotes.map(function (quote) {
                     return new __WEBPACK_IMPORTED_MODULE_0__quote_js__["a" /* default */](quote.fields);
                 });
+            },
+            sortBy: function sortBy() {
+                var order = 'order:' + this.sort;
+                mixer.sort(order);
             }
         },
         beforeMount: function beforeMount() {
@@ -174,6 +182,39 @@ window.onload = function () {
 
 /***/ }),
 /* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Movie = function () {
+    function Movie(data) {
+        _classCallCheck(this, Movie);
+
+        this.data = data;
+    }
+
+    _createClass(Movie, [{
+        key: 'name',
+        get: function get() {
+            return this.data;;
+        }
+    }, {
+        key: 'filter',
+        get: function get() {
+            return this.data.toLowerCase().replace(/\s/g, '-');
+        }
+    }]);
+
+    return Movie;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Movie);
+
+/***/ }),
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -233,7 +274,7 @@ var Quote = function () {
 /* harmony default export */ __webpack_exports__["a"] = (Quote);
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -11380,7 +11421,7 @@ module.exports = function(module) {
 //# sourceMappingURL=contentful.js.map
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**!
@@ -22044,7 +22085,7 @@ module.exports = function(module) {
 })(window);
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32136,10 +32177,10 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 var g;
@@ -32166,48 +32207,12 @@ module.exports = g;
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(0);
 module.exports = __webpack_require__(1);
 
-
-/***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Movie = function () {
-    function Movie(data) {
-        _classCallCheck(this, Movie);
-
-        this.data = data;
-    }
-
-    _createClass(Movie, [{
-        key: 'name',
-        get: function get() {
-            return this.data;;
-        }
-    }, {
-        key: 'filter',
-        get: function get() {
-            return this.data.toLowerCase().replace(/\s/g, '-');
-        }
-    }]);
-
-    return Movie;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (Movie);
 
 /***/ })
 /******/ ]);
