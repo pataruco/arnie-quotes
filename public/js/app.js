@@ -63,23 +63,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var contentful = __webpack_require__(2);
-var Vue = __webpack_require__(4);
+var contentful = __webpack_require__(3);
+var Vue = __webpack_require__(5);
 var SPACE_ID = '6t8um8649ku7';
 var ACCESS_TOKEN = 'b1f8e5581b04e86e16d6ca876d41904c2c9f026c1ec806f246013e134a464c32';
 var SPACE_NAME = 'vue-sandbox';
-var mixitup = __webpack_require__(3);
+var mixitup = __webpack_require__(4);
+var Quote = __webpack_require__(2);
 
 var client = contentful.createClient({
     // This is the space ID. A space is like a project folder in Contentful terms
@@ -87,55 +84,6 @@ var client = contentful.createClient({
     // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
     accessToken: ACCESS_TOKEN
 });
-
-var Quote = function () {
-    function Quote(data) {
-        _classCallCheck(this, Quote);
-
-        this.data = data;
-    }
-
-    _createClass(Quote, [{
-        key: 'className',
-        get: function get() {
-            return this.data.movie.toLowerCase().replace(/\s/g, '-');
-        }
-    }, {
-        key: 'year',
-        get: function get() {
-            return this.data.year;
-        }
-    }, {
-        key: 'movie',
-        get: function get() {
-            return this.data.movie;
-        }
-    }, {
-        key: 'youTubeUrl',
-        get: function get() {
-            return this.data.youtubeUrl;
-        }
-    }, {
-        key: 'youTubeCode',
-        get: function get() {
-            var url = this.data.youtubeUrl;
-            url = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-            return url[2] !== undefined ? url[2].split(/[^0-9a-z_\-]/i)[0] : url[0];
-        }
-    }, {
-        key: 'quote',
-        get: function get() {
-            return this.data.quote;
-        }
-    }, {
-        key: 'character',
-        get: function get() {
-            return this.data.character;
-        }
-    }]);
-
-    return Quote;
-}();
 
 var mixer = void 0;
 window.onload = function () {
@@ -194,6 +142,65 @@ window.onload = function () {
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Quote = function () {
+    function Quote(data) {
+        _classCallCheck(this, Quote);
+
+        this.data = data;
+    }
+
+    _createClass(Quote, [{
+        key: 'className',
+        get: function get() {
+            return this.data.movie.toLowerCase().replace(/\s/g, '-');
+        }
+    }, {
+        key: 'year',
+        get: function get() {
+            return this.data.year;
+        }
+    }, {
+        key: 'movie',
+        get: function get() {
+            return this.data.movie;
+        }
+    }, {
+        key: 'youTubeUrl',
+        get: function get() {
+            return this.data.youtubeUrl;
+        }
+    }, {
+        key: 'youTubeCode',
+        get: function get() {
+            var url = this.data.youtubeUrl;
+            url = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+            return url[2] !== undefined ? url[2].split(/[^0-9a-z_\-]/i)[0] : url[0];
+        }
+    }, {
+        key: 'quote',
+        get: function get() {
+            return this.data.quote;
+        }
+    }, {
+        key: 'character',
+        get: function get() {
+            return this.data.character;
+        }
+    }]);
+
+    return Quote;
+}();
+
+module.exports = Quote;
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -11340,7 +11347,7 @@ module.exports = function(module) {
 //# sourceMappingURL=contentful.js.map
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**!
@@ -22004,7 +22011,7 @@ module.exports = function(module) {
 })(window);
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32096,10 +32103,10 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 var g;
@@ -32126,7 +32133,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(0);
