@@ -9,11 +9,11 @@
     <h1>Arnie quotes test</h1>
     <main id="app">
         <nav>
-            <select v-model="filter" v-on:change="filterBy">
-                <option value="all">All</option>
+            <select v-model="filter" v-on:change="filterBy" name="filter">
+                <option selected value="all">All</option>
                 <option v-for="movie in movies" v-bind:value="movie.filter">{{ movie.name }}</option>
             </select>
-            <select v-model="sort" v-on:change="sortBy">
+            <select v-model="sort" v-on:change="sortBy" name="sort">
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
             </select>

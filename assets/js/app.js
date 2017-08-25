@@ -33,13 +33,6 @@ window.onload = function() {
                     })
                     .catch(console.error)
             },
-            filterBy: function( ) {
-                if ( this.filter === 'all') {
-                    return mixer.filter( this.filter );
-                }
-                let movieFilter = `.${this.filter}`;
-                return mixer.filter( movieFilter )
-            },
             setMovies: function(quotes) {
                 let movies = [ ];
                 for ( quote of quotes ) {
@@ -60,6 +53,15 @@ window.onload = function() {
             sortBy: function ( ) {
                 let order = `order:${this.sort}`;
                 mixer.sort( order )
+            },
+            filterBy: function( ) {
+                if ( this.filter === 'all') {
+                    return mixer.filter( this.filter );
+                }
+                let movieFilter = `.${this.filter}`;
+                if ( mixer ) {
+                    mixer.filter( movieFilter )
+                }
             }
         },
         beforeMount() {
@@ -68,7 +70,7 @@ window.onload = function() {
         updated() {
             mixer = mixitup('#js-container', {
                 animation: {
-                    effects: 'fade rotateZ(-180deg)',
+                    effects: 'fade rotateY(-180deg)',
                     duration: 700
                 }
             });
