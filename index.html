@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Contentful sandbox</title>
-    <link rel="stylesheet" href="./public/css/app.css">
+    <link rel="stylesheet" href="./public/css/main.css">
 </head>
+
 <body>
-    <h1>Arnie quotes test</h1>
+    <header>
+        <h1>Arnie quotes</h1>
+    </header>
     <main id="app">
-        <nav>
-            <select v-model="filter" v-on:change="filterBy" name="filter">
+        <nav class="row">
+            <select v-model="filter" v-on:change="filterBy" name="filter" class="select select--movies column column--half">
+                <option value="" disabled>Filter by Movie</option>
                 <option selected value="all">All</option>
                 <option v-for="movie in movies" v-bind:value="movie.filter">{{ movie.name }}</option>
             </select>
-            <select v-model="sort" v-on:change="sortBy" name="sort">
+            <select v-model="sort" v-on:change="sortBy" name="sort" class="select select--year column--half">
+                <option value="" disabled>Sort by Year</option>
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
             </select>
         </nav>
-        <section id="js-container" class="container">
-            <article v-for="quote in quotes" v-bind:class="quote.className" class="mix" v-bind:data-order="quote.year">
+        <section id="js-container" class="row">
+            <article v-for="quote in quotes" v-bind:class="quote.className" class="mix quote column column--third" v-bind:data-order="quote.year">
                 <blockquote cite="http://">
                     <h2> {{ quote.quote }} </h2>
                     <footer>
                         <p>{{ quote.character }}</p>
-                        <p>{{ quote.movie }}</p>
-                        <time>{{ quote.year }}</time>
+                        <p>
+                            {{ quote.movie }}
+                            <time>({{ quote.year }})</time>
+                        </p>
                     </footer>
                 </blockquote>
             </article>
@@ -33,4 +41,5 @@
     </main>
     <script src="./public/js/app.js" charset="utf-8"></script>
 </body>
+
 </html>
