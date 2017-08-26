@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Contentful sandbox</title>
     <link rel="stylesheet" href="./public/css/app.css">
 </head>
+
 <body>
     <h1>Arnie quotes test</h1>
     <main id="app">
-        <nav>
-            <select v-model="filter" v-on:change="filterBy" name="filter">
-                <option selected value="all">All</option>
-                <option v-for="movie in movies" v-bind:value="movie.filter">{{ movie.name }}</option>
+        <nav class="navigation">
+            <select v-model="filter" v-on:change="filterBy" name="filter" class="select select--movies">
+				<option value="" disabled selected>Filter by Movie</option>
+                <optgroup label="movies">
+                    <option selected value="all">All</option>
+                    <option v-for="movie in movies" v-bind:value="movie.filter">{{ movie.name }}</option>
+                </optgroup>
             </select>
-            <select v-model="sort" v-on:change="sortBy" name="sort">
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
+            <select v-model="sort" v-on:change="sortBy" name="sort" class="select select--year">
+                <option value="" disabled selected>Sort by Year</option>
+                <optgroup label="Order">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </optgroup>
             </select>
         </nav>
         <section id="js-container" class="container">
-            <article v-for="quote in quotes" v-bind:class="quote.className" class="mix" v-bind:data-order="quote.year">
+            <article v-for="quote in quotes" v-bind:class="quote.className" class="mix quote" v-bind:data-order="quote.year">
                 <blockquote cite="http://">
                     <h2> {{ quote.quote }} </h2>
                     <footer>
@@ -33,4 +41,5 @@
     </main>
     <script src="./public/js/app.js" charset="utf-8"></script>
 </body>
+
 </html>
