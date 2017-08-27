@@ -21,8 +21,7 @@ window.onload = function() {
         data: {
             quotes: [],
             movies: [],
-            filter: '',
-            sort: ''
+            filtersIsActive: false
         },
         methods: {
             getQuotes: function() {
@@ -50,18 +49,23 @@ window.onload = function() {
                     return new Quote(quote.fields);
                 });
             },
-            sortBy: function ( ) {
-                let order = `order:${this.sort}`;
+            sortBy: function( sortOrder) {
+                console.log( sortOrder );
+                let order = `order:${sortOrder}`;
                 mixer.sort( order )
             },
-            filterBy: function( ) {
-                if ( this.filter === 'all') {
-                    return mixer.filter( this.filter );
+            filterBy: function( filter ) {
+                if ( filter === 'all') {
+                    return mixer.filter( filter );
                 }
-                let movieFilter = `.${this.filter}`;
+                let movieFilter = `.${filter}`;
                 if ( mixer ) {
                     mixer.filter( movieFilter )
                 }
+                this.filtersIsActive = false;
+            },
+            showFilters: function ( ) {
+                this.filtersIsActive = !this.filtersIsActive;
             }
         },
         beforeMount() {

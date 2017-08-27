@@ -13,16 +13,36 @@
     </header>
     <main id="app">
         <nav class="row">
-            <select v-model="filter" v-on:change="filterBy" name="filter" class="select select--movies column column--half">
-                <option value="" disabled>Filter by Movie</option>
-                <option selected value="all">All</option>
-                <option v-for="movie in movies" v-bind:value="movie.filter">{{ movie.name }}</option>
-            </select>
-            <select v-model="sort" v-on:change="sortBy" name="sort" class="select select--year column--half">
-                <option value="" disabled>Sort by Year</option>
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
-            </select>
+            <div class="column column--half select">
+                <h2 v-on:click="showFilters">Filter by movie</h2>
+                <ul v-bind:class="{ active: filtersIsActive }">
+                    <li>
+                        <button type="button" name="button" v-on:click="filterBy( 'all' )">
+                            All
+                        </button>
+                    </li>
+                    <li v-for="movie in movies">
+                        <button type="button" name="button" v-on:click="filterBy( movie.filter )">
+                            {{ movie.name }}
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="column column--half select">
+                <h2>Sort by year</h2>
+                <ul>
+                    <li>
+                        <button type="button" name="button" v-on:click="sortBy( 'asc' )">
+                            Ascending
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" name="button" v-on:click="sortBy( 'desc' )">
+                            Descending
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </nav>
         <section id="js-container" class="row">
             <article v-for="quote in quotes" v-bind:class="quote.className" class="mix quote column column--third" v-bind:data-order="quote.year">
