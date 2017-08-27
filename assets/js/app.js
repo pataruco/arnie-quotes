@@ -22,7 +22,9 @@ window.onload = function() {
             quotes: [],
             movies: [],
             filtersIsActive: false,
-            sortIsActive: false
+            sortIsActive: false,
+            showModal: false,
+            youTubeUrl: ''
         },
         methods: {
             getQuotes: function() {
@@ -41,7 +43,13 @@ window.onload = function() {
                         movies.push(movie)
                     }
                 }
-                return this.movies = movies.map( ( movieName ) => {
+                let sortedMovies = movies.sort( (a, b) => {
+                      if (a < b) return -1;
+                      else if (a > b) return 1;
+                      return 0;
+                    });
+
+                return this.movies = sortedMovies.map( ( movieName ) => {
                     return new Movie( movieName );
                 });
             },
@@ -70,6 +78,14 @@ window.onload = function() {
             },
             showSort: function ( ) {
                 this.sortIsActive = !this.sortIsActive;
+            },
+            showYoutubeModal: function ( id ) {
+                this.youTubeUrl = `http://www.youtube.com/embed/${id}?&autoplay=1&showinfo=0&controls=1&autohide=0`;
+                window.scrollTo(0,0);
+                this.showModal = true;
+            },
+            closeModal: function ( ) {
+                this.showModal = false;
             }
         },
         beforeMount() {

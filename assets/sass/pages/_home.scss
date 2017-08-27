@@ -1,6 +1,9 @@
 // -----------------------------------------------------------------------------
 // This file contains styles that are specific to the home page.
 // -----------------------------------------------------------------------------
+.site {
+    position: relative;
+}
 .select {
     display: block;
     position: relative;
@@ -70,6 +73,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: ease .2s all;
+    background-color: white;
     blockquote {
         margin: 0;
         width: 100%;
@@ -98,5 +103,54 @@
             font-style: italic;
             text-decoration: underline;
         }
+    }
+    @include on-event() {
+        transform: scale(1.1);
+    }
+}
+
+.modal {
+    display: none;
+    border: 1px solid black;
+    background-color: white;
+    width: 90vw;
+    height: 90vh;
+    position: absolute;
+    top: 2.5vh;
+    left: 5vw;
+    z-index: 20;
+    padding: 1em;
+    &.active {
+        display: block;
+        transition: ease .5s all;
+    }
+    iframe {
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+    button {
+        display: block;
+        font-size: 2em;
+        transform: rotate(45deg);
+        background-color: black;
+        color: white;
+        line-height: 0.7;
+        border-radius: 2em;
+        -webkit-appearance: none;
+        border: 1px solid;
+        outline: none;
+        padding: .25em;
+        padding-top: .1em;
+        border: 1px solid black;
+        transition: ease .5s all;
+        position: absolute;
+        top: -0.5em;
+        right: -0.5em;
+        @include on-event( ) {
+            color: black;
+            background-color: white;
+        }
+
     }
 }
