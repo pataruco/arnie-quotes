@@ -21,7 +21,8 @@ window.onload = function() {
         data: {
             quotes: [],
             movies: [],
-            filtersIsActive: false
+            filtersIsActive: false,
+            sortIsActive: false
         },
         methods: {
             getQuotes: function() {
@@ -50,9 +51,9 @@ window.onload = function() {
                 });
             },
             sortBy: function( sortOrder) {
-                console.log( sortOrder );
                 let order = `order:${sortOrder}`;
-                mixer.sort( order )
+                mixer.sort( order );
+                this.sortIsActive = false;
             },
             filterBy: function( filter ) {
                 if ( filter === 'all') {
@@ -66,6 +67,9 @@ window.onload = function() {
             },
             showFilters: function ( ) {
                 this.filtersIsActive = !this.filtersIsActive;
+            },
+            showSort: function ( ) {
+                this.sortIsActive = !this.sortIsActive;
             }
         },
         beforeMount() {

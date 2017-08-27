@@ -29,8 +29,8 @@
                 </ul>
             </div>
             <div class="column column--half select">
-                <h2>Sort by year</h2>
-                <ul>
+                <h2 v-on:click="showSort">Sort by year</h2>
+                <ul v-bind:class="{ active: sortIsActive }">
                     <li>
                         <button type="button" name="button" v-on:click="sortBy( 'asc' )">
                             Ascending

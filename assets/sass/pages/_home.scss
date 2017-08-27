@@ -55,8 +55,8 @@
         outline: none;
         transition: all ease 0.5s;
         @include on-event( ) {
-            background-color: transparentize(black, 0.25);
-            color: white;
+            background-color: lightgrey;
+            color: black;
         }
     }
 }
