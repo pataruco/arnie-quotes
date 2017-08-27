@@ -80,7 +80,7 @@ window.onload = function() {
                 this.sortIsActive = !this.sortIsActive;
             },
             showYoutubeModal: function ( id ) {
-                this.youTubeUrl = `https://www.youtube.com/embed/${id}?&autoplay=1&showinfo=0&controls=1&autohide=0`;
+                this.youTubeUrl = `//www.youtube.com/embed/${id}?&autoplay=1&showinfo=0&controls=1&autohide=0`;
                 window.scrollTo(0,0);
                 this.showModal = true;
             },
