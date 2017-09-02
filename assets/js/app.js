@@ -95,7 +95,7 @@ window.onload = function() {
             mixer = mixitup('#js-container', {
                 animation: {
                     effects: 'fade rotateY(-180deg)',
-                    duration: 700
+                    duration: 500
                 }
             });
         }
